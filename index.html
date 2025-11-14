@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АИКА | Элитный маникюр</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E4A6;
+            --gold-dark: #B8860B;
+            --black: #0A0A0A;
+            --dark: #1A1A1A;
+            --white: #FFFFFF;
+            --cream: #F8F5F0;
+            --accent: #E8C8A9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        .luxury-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                linear-gradient(45deg, var(--black) 0%, #111 100%);
+            z-index: -2;
+        }
+
+        .gold-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.03) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.03) 2px, transparent 2px);
+            background-size: 100px 100px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, var(--black) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            z-index: 3;
+            max-width: 500px;
+            top: 50%;
+            left: 4%;
+            transform: translateY(-50%);
+            padding: 40px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .luxury-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            position: relative;
+        }
+
+        .luxury-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .luxury-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            color: var(--cream);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .luxury-btn {
+            display: inline-flex;
+            align-items: center;
+            background: transparent;
+            color: var(--gold);
+            padding: 18px 45px;
+            border: 2px solid var(--gold);
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .luxury-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: 0.6s;
+        }
+
+        .luxury-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .luxury-btn:hover::before {
+            left: 100%;
+        }
+
+        .hero-gallery {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60%;
+            height: 80%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            z-index: 0;
+        }
+
+        .hero-photo {
+            background: var(--dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .hero-photo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.1) 100%);
+            z-index: 1;
+        }
+
+        .hero-photo:hover {
+            transform: scale(1.05);
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .photo-1 { grid-area: 1 / 1 / 2 / 2; }
+        .photo-2 { grid-area: 1 / 2 / 2 / 3; }
+        .photo-3 { grid-area: 2 / 1 / 3 / 2; }
+        .photo-4 { grid-area: 2 / 2 / 3 / 3; }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+            margin: 25px auto;
+        }
+
+        .luxury-gallery {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            gap: 30px;
+        }
+
+        .gallery-slide {
+            min-width: 350px;
+            height: 500px;
+            background: var(--dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+
+        .gallery-slide:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            font-size: 1.3rem;
+        }
+
+        .gallery-nav:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-nav.prev {
+            left: -100px;
+        }
+
+        .gallery-nav.next {
+            right: -100px;
+        }
+
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 15px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dot::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--gold);
+            transform: scale(1.2);
+        }
+
+        .dot.active::after {
+            border-color: var(--gold);
+        }
+
+        /* Price Section */
+        .price-section {
+            padding: 120px 0;
+            background: var(--dark);
+            position: relative;
+        }
+
+        .price-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .luxury-cards {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .price-card {
+            background: linear-gradient(145deg, #1a1a1a, #222);
+            padding: 50px 40px;
+            width: 450px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(45deg, var(--gold), transparent, var(--gold-dark));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .price-card:hover::before {
+            opacity: 1;
+        }
+
+        .price-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .price-card h3 {
+            color: var(--gold);
+            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .price-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .price-item:hover {
+            border-bottom-color: var(--gold);
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-name {
+            flex: 1;
+            font-weight: 400;
+            color: var(--cream);
+        }
+
+        .price-value {
+            font-weight: 600;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%);
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .luxury-social {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .social-link {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.8rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: 0.6s;
+        }
+
+        .social-link:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .username {
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            margin-top: 40px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Photo containers */
+        .photo-container {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .luxury-title {
+                font-size: 4rem;
+            }
+            
+            .hero-gallery {
+                width: 50%;
+            }
+            
+            .gallery-nav.prev {
+                left: -50px;
+            }
+            
+            .gallery-nav.next {
+                right: -50px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 120px 0 60px;
+            }
+            
+            .hero::before {
+                display: none;
+            }
+            
+            .hero-content {
+                position: relative;
+                max-width: 90%;
+                margin: 0 auto 60px;
+                left: auto;
+                transform: none;
+                top: auto;
+            }
+            
+            .luxury-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .hero-gallery {
+                position: relative;
+                width: 100%;
+                transform: none;
+                height: 400px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .gallery-slide {
+                min-width: 300px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .luxury-title {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .price-card {
+                width: 100%;
+                padding: 30px 20px;
+            }
+            
+            .luxury-social {
+                flex-wrap: wrap;
+            }
+            
+            .gallery-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+            
+            .gallery-nav.prev {
+                left: -30px;
+            }
+            
+            .gallery-nav.next {
+                right: -30px;
+            }
+            
+            .hero-content {
+                padding: 30px 25px;
+                left: 5%;
+                transform: translateY(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                left: 2%;
+                right: 2%;
+                width: 96%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="luxury-bg"></div>
+    <div class="gold-pattern"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="luxury-title">АИКА</h1>
+                <p class="luxury-subtitle">Искусство маникюра в премиальном исполнении</p>
+                <a href="#gallery" class="luxury-btn">
+                    <span>Открыть коллекцию</span>
+                </a>
+            </div>
+            
+            <div class="hero-gallery">
+                <div class="hero-photo photo-1">
+                    <div class="photo-container" style="background-image: url('1.jpg')"></div>
+                </div>
+                <div class="hero-photo photo-2">
+                    <div class="photo-container" style="background-image: url('2.jpg')"></div>
+                </div>
+                <div class="hero-photo photo-3">
+                    <div class="photo-container" style="background-image: url('3.jpg')"></div>
+                </div>
+                <div class="hero-photo photo-4">
+                    <div class="photo-container" style="background-image: url('4.jpg')"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Портфолио работ</h2>
+            <div class="luxury-gallery">
+                <div class="gallery-track">
+                    <div class="gallery-slide">
+                        <div class="photo-container" style="background-image: url('1.jpg')"></div>
+                    </div>
+                    <div class="gallery-slide">
+                        <div class="photo-container" style="background-image: url('2.jpg')"></div>
+                    </div>
+                    <div class="gallery-slide">
+                        <div class="photo-container" style="background-image: url('3.jpg')"></div>
+                    </div>
+                    <div class="gallery-slide">
+                        <div class="photo-container" style="background-image: url('4.jpg')"></div>
+                    </div>
+                    <div class="gallery-slide">
+                        <div class="photo-container" style="background-image: url('5.jpg')"></div>
+                    </div>
+                </div>
+                <div class="gallery-nav prev">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="gallery-nav next">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="gallery-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Section -->
+    <section class="price-section">
+        <div class="container">
+            <h2 class="section-title">Прайс-лист</h2>
+            <div class="luxury-cards">
+                <div class="price-card">
+                    <h3>Маникюр</h3>
+                    <div class="price-item">
+                        <div class="price-name">Покрытие на свои ногти</div>
+                        <div class="price-value">1500₽</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-name">Укрепление + покрытие</div>
+                        <div class="price-value">1700₽</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-name">Наращивание (1-3 ногтя)</div>
+                        <div class="price-value">2200₽</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-name">Наращивание (3-6 ногтей)</div>
+                        <div class="price-value">2400₽</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-name">Коррекция (до 3 ногтей)</div>
+                        <div class="price-value">1700₽</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-name">Коррекция (до 6 ногтей)</div>
+                        <div class="price-value">1900₽</div>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <h3>Педикюр</h3>
+                    <div class="price-item">
+                        <div class="price-name">Гигиена ногтей без покрытия</div>
+                        <div class="price-value">1000₽</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-name">Гигиена ногтей с покрытием</div>
+                        <div class="price-value">1500₽</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-name">Гигиена комплекс без покрытия</div>
+                        <div class="price-value">2000₽</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-name">Гигиена комплекс с покрытием</div>
+                        <div class="price-value">2500₽</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь со мной</h2>
+            <div class="luxury-social">
+                <!-- Оставлен только Telegram -->
+                <a href="https://t.me/tekaeva_blog" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+            <div class="username">@tekaeva_blog</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>АИКА © 2025-nowadays | Элитный маникюр премиум-класса</p>
+        </div>
+    </footer>
+
+    <script>
+        // Gallery Slider
+        const track = document.querySelector('.gallery-track');
+        const slides = document.querySelectorAll('.gallery-slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.gallery-nav.prev');
+        const nextBtn = document.querySelector('.gallery-nav.next');
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        let autoSlideInterval;
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentSlide * 380}px)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            updateSlider();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 4000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
+
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+                stopAutoSlide();
+                startAutoSlide();
+            });
+        });
+
+        // Pause auto slide on hover
+        const galleryContainer = document.querySelector('.luxury-gallery');
+        galleryContainer.addEventListener('mouseenter', stopAutoSlide);
+        galleryContainer.addEventListener('mouseleave', startAutoSlide);
+
+        // Start auto slide
+        startAutoSlide();
+
+        // Add scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.price-card, .section-title').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero photos
+        document.addEventListener('mousemove', (e) => {
+            const photos = document.querySelectorAll('.hero-photo');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            photos.forEach((photo, index) => {
+                const speed = 0.02 + (index * 0.01);
+                const xMove = x * speed * 100;
+                const yMove = y * speed * 100;
+                
+                photo.style.transform = `translate(${xMove}px, ${yMove}px) scale(1.05)`;
+            });
+        });
+    </script>
+</body>
+</html>
